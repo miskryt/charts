@@ -280,11 +280,70 @@ class Parser
 		return $data;
 	}
 
+	private function parseCharts(){
+		$this->reader->setReadDataOnly(true);
+
+		try
+		{
+			$table1 = $this->getWorkSheetByIndex(1)->rangeToArray('A2:F17', NULL, TRUE, TRUE, TRUE);
+			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('K1:Q15', NULL, TRUE, TRUE, TRUE);
+			$table3 = $this->getWorkSheetByIndex(1)->rangeToArray('K16:Q29', NULL, TRUE, TRUE, TRUE);
+			$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('K30:Q37', NULL, TRUE, TRUE, TRUE);
+			$table5 = $this->getWorkSheetByIndex(1)->rangeToArray('K38:Q40', NULL, TRUE, TRUE, TRUE);
+		}
+		catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
+			die('Error parsing charts: '.$e->getMessage());
+		}
+
+
+
+		$data['table1']['table_name'] = 'Overall Betting Averages';
+		$data['table1']['header_row'][] = '';
+		$data['table1']['rows'] = array_slice(array_slice($table1, 0), 1);
+
+		$data['table2']['table_name'] = 'A High Boards';
+		$data['table2']['header_row'][] = '';
+		$data['table2']['rows'] = array_slice(array_slice($table2, 0), 1);
+
+		$data['table3']['table_name'] = 'Broadway Boards';
+		$data['table3']['header_row'][] = '';
+		$data['table3']['rows'] = array_slice(array_slice($table3, 0), 1);
+
+		$data['table4']['table_name'] = 'Mid Boards';
+		$data['table4']['header_row'][] = '';
+		$data['table4']['rows'] = array_slice(array_slice($table4, 0), 1);
+
+		$data['table5']['table_name'] = 'Low Boards';
+		$data['table5']['header_row'][] = '';
+		$data['table5']['rows'] = array_slice(array_slice($table5, 0), 1);
+
+
+
+		$data['data'] = json_encode($data);
+		$data['sheet_name'] = $this->getWorkSheetByIndex(2)->getTitle();
+
+		return $data;
+	}
+
 	private function saveSheetToDb($data, $index, $tableName=''){
 		global $wpdb;
 
 		$ret = $wpdb->insert('charts_sheets', array(
 			'sheet' => $data['data'],
+			'sheet_name' => $data['sheet_name'],
+			'table_name' => $tableName,
+			'file_id' => $this->file_id,
+			'sheet_index' => $index
+		));
+
+		return $wpdb->insert_id;
+	}
+
+	private function saveChartsToDb($data, $index, $tableName=''){
+		global $wpdb;
+
+		$ret = $wpdb->insert('charts_charts', array(
+			'charts' => $data['data'],
 			'sheet_name' => $data['sheet_name'],
 			'table_name' => $tableName,
 			'file_id' => $this->file_id,
@@ -316,6 +375,7 @@ class Parser
 			$sheet1ToSave = $this->parseSheet1();
 			$imagesToSave = $this->parseImages();
 			$sheet2ToSave = $this->parseSheet2();
+			$chartsToSave = $this->parseCharts();
 			//die();
 		}
 		catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
@@ -327,6 +387,7 @@ class Parser
 		$sheet_id = $this->saveSheetToDb($sheet1ToSave, 1 );
 		$this->saveImagesToDb($imagesToSave, $sheet_id, 1);
 		$this->saveSheetToDb($sheet2ToSave, 2,'Bet Freq Graphs');
+		$this->saveChartsToDb($chartsToSave, 2);
 
 
 

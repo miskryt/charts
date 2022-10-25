@@ -4,11 +4,7 @@
 
     @include('includes.navbar',['sheets' => $sheets, 'file_id'=>$file_id])
 
-    @foreach($charts as $c)
-        @foreach($c[0]['header_row'] as $label)
-            '{{$label}}',
-        @endforeach
-    @endforeach
+<?php var_dump($charts['table1'])?>
 
     <div class="row">
         <div class="col-10">
@@ -24,10 +20,10 @@
                             @endforeach
                         ],
                         datasets: [{
-                            label: 'Overall Betting Averages',
+                            label: '{{$charts['table1']['table_name']}}',
                             data: [
 
-                                @foreach(array_slice($charts[0]['rows'],0) as $row)
+                                @foreach(array_slice($charts['table1']['rows'],0) as $row)
                                     @foreach(array_slice($row,1) as $col)
                                         {x: '{{current($row)}}',y:'{{($col)}}'},
 
@@ -118,14 +114,16 @@
                             @endforeach
                         ],
                         datasets: [{
-                            label: 'Overall Betting Averages',
+                            label: '{{$charts['table2']['table_name']}}',
                             data: [
 
-                                    @foreach(array_slice($charts[1]['rows'],0) as $row)
-                                        @foreach(array_slice($row,1) as $col)
-                                            {x: '{{current($row)}}',y:'{{($col)}}'},
-                                        @endforeach
-                                    @endforeach
+                                    @foreach(array_slice($charts['table2']['rows'],0) as $row)
+                                    @foreach(array_slice($row,1) as $col)
+                                {x: '{{current($row)}}',y:'{{($col)}}'},
+
+                                @endforeach
+                                @endforeach
+
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -210,14 +208,16 @@
                             @endforeach
                         ],
                         datasets: [{
-                            label: 'Overall Betting Averages',
+                            label: '{{$charts['table3']['table_name']}}',
                             data: [
 
-                                    @foreach(array_slice($charts[2]['rows'],0) as $row)
+                                    @foreach(array_slice($charts['table3']['rows'],0) as $row)
                                     @foreach(array_slice($row,1) as $col)
                                 {x: '{{current($row)}}',y:'{{($col)}}'},
+
                                 @endforeach
                                 @endforeach
+
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -302,14 +302,16 @@
                             @endforeach
                         ],
                         datasets: [{
-                            label: 'Overall Betting Averages',
+                            label: '{{$charts['table4']['table_name']}}',
                             data: [
 
-                                    @foreach(array_slice($charts[3]['rows'],0) as $row)
-                                        @foreach(array_slice($row,1) as $col)
-                                            {x: '{{current($row)}}',y:'{{($col)}}'},
-                                        @endforeach
-                                    @endforeach
+                                    @foreach(array_slice($charts['table4']['rows'],0) as $row)
+                                    @foreach(array_slice($row,1) as $col)
+                                {x: '{{current($row)}}',y:'{{($col)}}'},
+
+                                @endforeach
+                                @endforeach
+
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -380,6 +382,97 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-10">
+            <canvas id="chart5" ></canvas>
+            <script>
+                const ctx5 = document.getElementById('chart5').getContext('2d');
+                const myChart5 = new Chart(ctx5, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            @foreach($charts as $c)
+
+                            @endforeach
+                        ],
+                        datasets: [{
+                            label: '{{$charts['table5']['table_name']}}',
+                            data: [
+                                    @foreach(array_slice($charts['table5']['rows'],0) as $row)
+                                        @foreach(array_slice($row,1) as $col)
+                                            {x: '{{current($row)}}-{{$i}}',y:'{{($col)}}'},
+
+                                        @endforeach
+                                    @endforeach
+                            ],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="col-2">
+            <div class="row ">
+                <div class="col">
+                    <div class="card card-sheet-name">
+                        <div class="card-body">
+                            {{$tables['table5']['table_name']}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-block">
+                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                    <thead>
+                    <tr>
+                        @foreach($tables['table5']['header_row'] as $cell)
+                            <th class="header-cell text-start">
+                                {{$cell}}
+                            </th>
+                        @endforeach
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($tables['table5']['rows'] as $i => $row)
+                        <tr class="" >
+							<?php $j=0;?>
+                            @foreach ($row as $colValue)
+                                <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
+                                    {{$colValue}}
+                                </td>
+								<?php $j++;?>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 
 @stop

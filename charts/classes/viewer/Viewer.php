@@ -137,23 +137,10 @@ class Viewer
 		$sheet_id = $params['sheet']['id'];
 
 		$tables = $wpdb->get_results(sprintf("select * from charts_sheets where file_id=%d and id=%d", $file_id, $sheet_id), ARRAY_A);
-		$chart_tables = $wpdb->get_results(sprintf("select * from charts_sheets where file_id=%d and sheet_index=%d", $file_id, 1), ARRAY_A);
-
-		$charts = [];
-		foreach ($chart_tables as $table)
-		{
-			$t = json_decode($table['sheet'], 1);
-
-			$charts[] = $t['table1'];
-			$charts[] = $t['table2'];
-			$charts[] = $t['table3'];
-			$charts[] = $t['table6'];
-			$charts[] = $t['table7'];
-			$charts[] = $t['table8'];
-		}
+		$charts = $wpdb->get_results(sprintf("select * from charts_charts where file_id=%d", $file_id), ARRAY_A);
 
 		$params['tables'] = json_decode($tables[0]['sheet'], 1);
-		$params['charts'] = $charts;
+		$params['charts'] = json_decode($charts[0]['charts'], 1);
 
 		echo $this->blade->make('pages.sheet_2', $params)->render();
 	}
