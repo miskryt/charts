@@ -4,7 +4,7 @@
 
     @include('includes.navbar',['sheets' => $sheets, 'file_id'=>$file_id])
 
-<?php var_dump($charts['table1'])?>
+
 
     <div class="row">
         <div class="col-10">
