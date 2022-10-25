@@ -1,0 +1,19 @@
+{
+    "autoload": {
+        "psr-4": {
+            "classes\\": "classes"
+        }
+    },
+    "name": "miskrytsi/charts",
+    "type": "library",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.25",
+        "jenssegers/blade": "^1.4"
+    },
+    "authors": [
+        {
+            "name": "Mikhail Iskrytski",
+            "email": "miskrytsi@solvd.com"
+        }
+    ]
+}

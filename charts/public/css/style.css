@@ -1,0 +1,46 @@
+
+.table  {
+    font-size: 12px;
+}
+
+table { border-collapse:collapse }
+
+.header-cell{
+    min-width: 60px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+
+.cell{
+    white-space: nowrap;
+}
+
+.header-row{
+    background-color: #F8F8F8;
+}
+
+
+
+.table-border{
+    border: 2px solid #C8C8C8;
+    border-radius: 5px;
+}
+
+thead > tr {
+    text-align: center;
+}
+
+td, th {
+    border:none;
+}
+
+.card-sheet-name{
+    border-style: hidden;
+}
+
+.image{
+    width: 60%;
+}
+
