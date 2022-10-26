@@ -5,9 +5,10 @@
 2. ```migrate database.migrate.sql```
 3. ```clone this repo here```
 4. ```move page-charts.php to the theme root```
-5. ```composer install```
-6. ```open charts/views/includes/head.blade.php and fix styles and js urls according to you theme```
-7. ```navigate to https://localhost/charts```
+5. ```set define('THEME_NAME', 'YOURTHEME'); in index.php where YOURTHEME is the folder name```
+6. ```composer install```
+7. ```open charts/views/includes/head.blade.php and fix styles and js urls according to you theme```
+8. ```navigate to https://localhost/charts```
 
 https://localhost/charts - will open the archive page with the only list of uploaded files.
 

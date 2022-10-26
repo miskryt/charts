@@ -7,7 +7,7 @@
     "name": "miskrytsi/charts",
     "type": "library",
     "require": {
-        "phpoffice/phpspreadsheet": "^1.25",
+        "phpoffice/phpspreadsheet": "^1.25"
     },
     "authors": [
         {
