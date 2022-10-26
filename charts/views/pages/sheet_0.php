@@ -10,9 +10,9 @@
 	</div>
 </div>
 <div class="table-block">
-	<table class="table table-striped table-hover table-border" id="table_0">
+	<table class="display nowrap table table-striped table-hover table-border" id="table_0">
 
-		<thead class="">
+		<thead>
 		<tr class="header-row">
 			<th>id</th>
 			<?php foreach ($params['sheet']['header_row'] as $cell):?>

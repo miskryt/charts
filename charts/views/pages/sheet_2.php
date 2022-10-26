@@ -1,6 +1,14 @@
 <?php require_once BASEPATH.'/views/includes/header.php';?>
 <?php require_once BASEPATH.'/views/includes/navbar.php';?>
 
+<div class="row">
+    <div class="col">
+        <h4>
+			<?=$params['filename']?>
+        </h4>
+    </div>
+</div>
+
     <div class="row">
         <div class="col-10">
             <canvas id="chart1" ></canvas>

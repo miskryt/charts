@@ -97,6 +97,8 @@ class Viewer
 		$sheet = $param['sheet'];
 		$data = [];
 
+
+
 		$data['id'] = (int)$sheet[0]['id'];
 		$data['file_id'] = (int)$param['file_id'];
 		$data['header_row'] = $sheet['header_row'];
@@ -104,6 +106,7 @@ class Viewer
 		$data['sheet_index'] = (int)$sheet[0]['sheet_index'];
 
 		$params = [
+			'filename' => $param['filename'],
 			'sheets' => $param['sheets'],
 			'file_id' => $data['file_id'],
 			'sheet' => ['header_row' => $data['header_row'], 'rows' => $data['rows']]
