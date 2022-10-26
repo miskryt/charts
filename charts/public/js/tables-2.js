@@ -8,6 +8,16 @@ $(document).ready(function () {
     var table = $('#table_0').DataTable({
         orderCellsTop: true,
         fixedHeader: true,
+        columnDefs: [
+            {
+                target: 0,
+                visible: false,
+            },
+        ],
+        lengthMenu: [
+            [10, 25, 50, 60, 81, 100, -1],
+            [10, 25, 50, 60, 81, 100, 'All'],
+        ],
         initComplete: function () {
             var api = this.api();
 
