@@ -143,7 +143,7 @@ class Viewer
 		$params['charts'] = json_decode($charts[0]['charts'], 1);
 
 
-		require_once BASEPATH.'/views/pages/sheet_3.php';
+		require_once BASEPATH.'/views/pages/sheet_2.php';
 	}
 
 	private function renderSheet3($params){
@@ -180,6 +180,11 @@ class Viewer
 		if($sheet['sheet_index'] === 2)
 		{
 			$this->renderSheet2($params);
+		}
+
+		if($sheet['sheet_index'] === 3)
+		{
+			$this->renderSheet3($params);
 		}
 	}
 
