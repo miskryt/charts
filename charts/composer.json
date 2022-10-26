@@ -8,7 +8,6 @@
     "type": "library",
     "require": {
         "phpoffice/phpspreadsheet": "^1.25",
-        "jenssegers/blade": "^1.4"
     },
     "authors": [
         {

@@ -12,7 +12,6 @@ class Viewer
 	private $filename;
 
 	public function __construct(){
-		//$this->blade = new Blade(BASEPATH.'/views', BASEPATH.'/tmp/cache');
 	}
 
 	private function getFiles(){
