@@ -1,10 +1,5 @@
-@extends('layouts.default')
-
-@section('content')
-
-    @include('includes.navbar',['sheets' => $sheets, 'file_id'=>$file_id])
-
-
+<?php require_once BASEPATH.'/views/includes/header.php';?>
+<?php require_once BASEPATH.'/views/includes/navbar.php';?>
 
     <div class="row">
         <div class="col-10">
@@ -15,21 +10,18 @@
                     type: 'bar',
                     data: {
                         labels: [
-                            @foreach($charts as $c)
+                            <?php foreach($params['charts'] as $c):?>
 
-                            @endforeach
+                            <?php endforeach?>
                         ],
                         datasets: [{
-                            label: '{{$charts['table1']['table_name']}}',
+                            label: '<?=$params['charts']['table1']['table_name']?>',
                             data: [
-
-                                @foreach(array_slice($charts['table1']['rows'],0) as $row)
-                                    @foreach(array_slice($row,1) as $col)
-                                        {x: '{{current($row)}}',y:'{{($col)}}'},
-
-                                    @endforeach
-                                @endforeach
-
+                                <?php foreach(array_slice($params['charts']['table1']['rows'],0) as $row):?>
+                                    <?php foreach(array_slice($row,1) as $col):?>
+                                        {x: '<?=current($row)?>',y:'<?=($col)?>'},
+                                    <?php endforeach?>
+                                <?php endforeach?>
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -66,34 +58,34 @@
                 <div class="col">
                     <div class="card card-sheet-name">
                         <div class="card-body">
-                            {{$tables['table1']['table_name']}}
+                            <?=$params['tables']['table1']['table_name']?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="table-block">
-                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                <table class=" table table-hover table-border" style="border-style: solid">
                     <thead>
                     <tr>
-                        @foreach($tables['table1']['header_row'] as $cell)
+                        <?php foreach($params['tables']['table1']['header_row'] as $cell):?>
                             <th class="header-cell text-start">
-                                {{$cell}}
+                                <?=$cell?>
                             </th>
-                        @endforeach
+                        <?php endforeach?>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tables['table1']['rows'] as $i => $row)
+                    <?php foreach ($params['tables']['table1']['rows'] as $i => $row):?>
                         <tr class="" >
 							<?php $j=0;?>
-                            @foreach ($row as $colValue)
+                            <?php foreach ($row as $colValue):?>
                                 <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
-                                    {{$colValue}}
+                                    <?=$colValue?>
                                 </td>
 								<?php $j++;?>
-                            @endforeach
+                            <?php endforeach?>
                         </tr>
-                    @endforeach
+                    <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -109,21 +101,18 @@
                     type: 'bar',
                     data: {
                         labels: [
-                            @foreach($charts as $c)
+                            <?php foreach($params['charts'] as $c):?>
 
-                            @endforeach
+                            <?php endforeach?>
                         ],
                         datasets: [{
-                            label: '{{$charts['table2']['table_name']}}',
+                            label: '<?=$params['charts']['table2']['table_name']?>',
                             data: [
-
-                                    @foreach(array_slice($charts['table2']['rows'],0) as $row)
-                                    @foreach(array_slice($row,1) as $col)
-                                {x: '{{current($row)}}',y:'{{($col)}}'},
-
-                                @endforeach
-                                @endforeach
-
+                                    <?php foreach(array_slice($params['charts']['table2']['rows'],0) as $row):?>
+                                        <?php foreach(array_slice($row,1) as $col):?>
+                                            {x: '<?=current($row)?>',y:'<?=($col)?>'},
+                                        <?php endforeach?>
+                                    <?php endforeach?>
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -160,34 +149,34 @@
                 <div class="col">
                     <div class="card card-sheet-name">
                         <div class="card-body">
-                            {{$tables['table2']['table_name']}}
+                            <?=$params['tables']['table2']['table_name']?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="table-block">
-                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                <table class=" table table-hover table-border" style="border-style: solid">
                     <thead>
                     <tr>
-                        @foreach($tables['table2']['header_row'] as $cell)
+                        <?php foreach($params['tables']['table2']['header_row'] as $cell):?>
                             <th class="header-cell text-start">
-                                {{$cell}}
+                                <?=$cell?>
                             </th>
-                        @endforeach
+                        <?php endforeach?>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tables['table2']['rows'] as $i => $row)
+                    <?php foreach ($params['tables']['table2']['rows'] as $i => $row):?>
                         <tr class="" >
 							<?php $j=0;?>
-                            @foreach ($row as $colValue)
+                            <?php foreach ($row as $colValue):?>
                                 <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
-                                    {{$colValue}}
+                                    <?=$colValue?>
                                 </td>
 								<?php $j++;?>
-                            @endforeach
+                            <?php endforeach?>
                         </tr>
-                    @endforeach
+                    <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -203,20 +192,18 @@
                     type: 'bar',
                     data: {
                         labels: [
-                            @foreach($charts as $c)
+                            <?php foreach($params['charts'] as $c):?>
 
-                            @endforeach
+                            <?php endforeach?>
                         ],
                         datasets: [{
-                            label: '{{$charts['table3']['table_name']}}',
+                            label: '<?=$params['charts']['table3']['table_name']?>',
                             data: [
-
-                                    @foreach(array_slice($charts['table3']['rows'],0) as $row)
-                                    @foreach(array_slice($row,1) as $col)
-                                {x: '{{current($row)}}',y:'{{($col)}}'},
-
-                                @endforeach
-                                @endforeach
+                                    <?php foreach(array_slice($params['charts']['table3']['rows'],0) as $row):?>
+                                        <?php foreach(array_slice($row,1) as $col):?>
+                                            {x: '<?=current($row)?>',y:'<?=($col)?>'},
+                                        <?php endforeach?>
+                                    <?php endforeach?>
 
                             ],
                             backgroundColor: [
@@ -254,34 +241,34 @@
                 <div class="col">
                     <div class="card card-sheet-name">
                         <div class="card-body">
-                            {{$tables['table3']['table_name']}}
+                            <?=$params['tables']['table3']['table_name']?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="table-block">
-                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                <table class=" table table-hover table-border" style="border-style: solid">
                     <thead>
                     <tr>
-                        @foreach($tables['table3']['header_row'] as $cell)
+                        <?php foreach($params['tables']['table3']['header_row'] as $cell):?>
                             <th class="header-cell text-start">
-                                {{$cell}}
+                                <?=$cell?>
                             </th>
-                        @endforeach
+                        <?php endforeach?>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tables['table3']['rows'] as $i => $row)
+                    <?php foreach ($params['tables']['table3']['rows'] as $i => $row):?>
                         <tr class="" >
 							<?php $j=0;?>
-                            @foreach ($row as $colValue)
+                            <?php foreach ($row as $colValue):?>
                                 <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
-                                    {{$colValue}}
+                                    <?=$colValue?>
                                 </td>
 								<?php $j++;?>
-                            @endforeach
+                            <?php endforeach?>
                         </tr>
-                    @endforeach
+                    <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -297,21 +284,18 @@
                     type: 'bar',
                     data: {
                         labels: [
-                            @foreach($charts as $c)
+                            <?php foreach($params['charts'] as $c):?>
 
-                            @endforeach
+                            <?php endforeach?>
                         ],
                         datasets: [{
-                            label: '{{$charts['table4']['table_name']}}',
+                            label: '<?=$params['charts']['table4']['table_name']?>',
                             data: [
-
-                                    @foreach(array_slice($charts['table4']['rows'],0) as $row)
-                                    @foreach(array_slice($row,1) as $col)
-                                {x: '{{current($row)}}',y:'{{($col)}}'},
-
-                                @endforeach
-                                @endforeach
-
+                                    <?php foreach(array_slice($params['charts']['table4']['rows'],0) as $row):?>
+                                        <?php foreach(array_slice($row,1) as $col):?>
+                                            {x: '<?=current($row)?>',y:'<?=($col)?>'},
+                                        <?php endforeach?>
+                                    <?php endforeach?>
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -348,34 +332,34 @@
                 <div class="col">
                     <div class="card card-sheet-name">
                         <div class="card-body">
-                            {{$tables['table4']['table_name']}}
+                            <?=$params['tables']['table4']['table_name']?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="table-block">
-                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                <table class=" table table-hover table-border" style="border-style: solid">
                     <thead>
                     <tr>
-                        @foreach($tables['table4']['header_row'] as $cell)
+                        <?php foreach($params['tables']['table4']['header_row'] as $cell):?>
                             <th class="header-cell text-start">
-                                {{$cell}}
+                                <?=$cell?>
                             </th>
-                        @endforeach
+                        <?php endforeach?>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tables['table4']['rows'] as $i => $row)
+                    <?php foreach ($params['tables']['table4']['rows'] as $i => $row):?>
                         <tr class="" >
 							<?php $j=0;?>
-                            @foreach ($row as $colValue)
+                            <?php foreach ($row as $colValue):?>
                                 <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
-                                    {{$colValue}}
+                                    <?=$colValue?>
                                 </td>
 								<?php $j++;?>
-                            @endforeach
+                            <?php endforeach?>
                         </tr>
-                    @endforeach
+                    <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -391,19 +375,18 @@
                     type: 'bar',
                     data: {
                         labels: [
-                            @foreach($charts as $c)
+                            <?php foreach($params['charts'] as $c):?>
 
-                            @endforeach
+                            <?php endforeach?>
                         ],
                         datasets: [{
-                            label: '{{$charts['table5']['table_name']}}',
+                            label: '<?=$params['charts']['table5']['table_name']?>',
                             data: [
-                                    @foreach(array_slice($charts['table5']['rows'],0) as $row)
-                                        @foreach(array_slice($row,1) as $col)
-                                            {x: '{{current($row)}}-{{$i}}',y:'{{($col)}}'},
-
-                                        @endforeach
-                                    @endforeach
+                                    <?php foreach(array_slice($params['charts']['table5']['rows'],0) as $row):?>
+                                        <?php foreach(array_slice($row,1) as $col):?>
+                                            {x: '<?=current($row)?>-<?=$i?>',y:'<?=($col)?>'},
+                                        <?php endforeach?>
+                                    <?php endforeach?>
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
@@ -440,34 +423,34 @@
                 <div class="col">
                     <div class="card card-sheet-name">
                         <div class="card-body">
-                            {{$tables['table5']['table_name']}}
+                            <?=$params['tables']['table5']['table_name']?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="table-block">
-                <table class="tables_1 table table-hover table-border" style="border-style: solid">
+                <table class=" table table-hover table-border" style="border-style: solid">
                     <thead>
                     <tr>
-                        @foreach($tables['table5']['header_row'] as $cell)
+                        <?php foreach($params['tables']['table5']['header_row'] as $cell):?>
                             <th class="header-cell text-start">
-                                {{$cell}}
+                                <?=$cell?>
                             </th>
-                        @endforeach
+                        <?php endforeach?>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($tables['table5']['rows'] as $i => $row)
+                    <?php foreach ($params['tables']['table5']['rows'] as $i => $row):?>
                         <tr class="" >
 							<?php $j=0;?>
-                            @foreach ($row as $colValue)
+                            <?php foreach ($row as $colValue):?>
                                 <td class="cell <?=$j === 0 ? 'header-cell' : ''?>">
-                                    {{$colValue}}
+                                    <?=$colValue?>
                                 </td>
 								<?php $j++;?>
-                            @endforeach
+                            <?php endforeach?>
                         </tr>
-                    @endforeach
+                    <?php endforeach?>
                     </tbody>
                 </table>
             </div>
@@ -475,4 +458,4 @@
     </div>
 
 
-@stop
+<?php require_once BASEPATH.'/views/includes/footer.php';?>

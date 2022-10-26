@@ -12,15 +12,13 @@ class Viewer
 	private $filename;
 
 	public function __construct(){
-		$this->blade = new Blade(BASEPATH.'/views', BASEPATH.'/tmp/cache');
+		//$this->blade = new Blade(BASEPATH.'/views', BASEPATH.'/tmp/cache');
 	}
 
 	private function getFiles(){
 		global $wpdb;
 
-		$res = $wpdb->get_results('select * from charts_files', ARRAY_A);
-
-		return $res;
+		return $wpdb->get_results('select * from charts_files', ARRAY_A);
 	}
 
 	private function getFileNameById($id){
@@ -77,15 +75,14 @@ class Viewer
 		$data['header_row'] = json_decode($sheet[0]['sheet'])->header_row;
 		$data['rows'] = json_decode($sheet[0]['sheet'])->rows;
 		$data['sheet_index'] = (int)$sheet[0]['sheet_index'];
-		//var_dump( json_decode($sheet[0]['sheet'])->header_row);die();
 
-		//var_dump(json_decode($sheet[0]['sheet'], 1)['rows']);
 		return $data;
 	}
 
 
 	private function renderArchive($files){
-		echo $this->blade->make('pages.home', ['files' => $files])->render();
+		//echo $this->blade->make('pages.home', ['files' => $files])->render();
+		require_once BASEPATH.'/views/pages/home.php';
 	}
 
 	private function renderFile($sheets, $file_id ){
@@ -96,23 +93,24 @@ class Viewer
 		$this->renderSheet0($params);
 	}
 
-	private function renderSheet0($params){
-		$sheet = $params['sheet'];
+	private function renderSheet0($param){
+		$sheet = $param['sheet'];
 		$data = [];
 
 		$data['id'] = (int)$sheet[0]['id'];
-		$data['file_id'] = (int)$params['file_id'];
+		$data['file_id'] = (int)$param['file_id'];
 		$data['header_row'] = $sheet['header_row'];
 		$data['rows'] =       $sheet['rows'];
 		$data['sheet_index'] = (int)$sheet[0]['sheet_index'];
 
 		$params = [
-			'sheets' => $params['sheets'],
+			'sheets' => $param['sheets'],
 			'file_id' => $data['file_id'],
 			'sheet' => ['header_row' => $data['header_row'], 'rows' => $data['rows']]
 		];
 
-		echo $this->blade->make('pages.sheet_0', $params)->render();
+		//echo $this->blade->make('pages.sheet_0', $params)->render();
+		require_once BASEPATH.'/views/pages/sheet_0.php';
 	}
 
 	private function renderSheet1($params){
@@ -127,7 +125,9 @@ class Viewer
 		$params['tables'] = json_decode($tables[0]['sheet'], 1);
 		$params['tables']['table4']['images'][0] = $images[0];
 		$params['tables']['table5']['images'][0] = $images[1];
-		echo $this->blade->make('pages.sheet_1', $params)->render();
+		//
+		//echo $this->blade->make('pages.sheet_1', $params)->render();
+		require_once BASEPATH.'/views/pages/sheet_1.php';
 	}
 
 	private function renderSheet2($params){
@@ -142,7 +142,8 @@ class Viewer
 		$params['tables'] = json_decode($tables[0]['sheet'], 1);
 		$params['charts'] = json_decode($charts[0]['charts'], 1);
 
-		echo $this->blade->make('pages.sheet_2', $params)->render();
+		//echo $this->blade->make('pages.sheet_2', $params)->render();
+		require_once BASEPATH.'/views/pages/sheet_2.php';
 	}
 
 	private function renderSheet($sheets, $sheet_id, $file_id){
