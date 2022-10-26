@@ -537,7 +537,7 @@ class Parser
 		$sheet2_id = $this->saveSheetToDb($sheet2ToSave, 2,'Bet Freq Graphs');
 		$this->saveChartsToDb($chartsSheet2ToSave, $sheet2_id, 2);
 
-		$sheet3_id = $this->saveSheetToDb($sheet3ToSave, 2,'EV and EQR Graphs');
+		$sheet3_id = $this->saveSheetToDb($sheet3ToSave, 3,'EV and EQR Graphs');
 		$this->saveChartsToDb($chartsSheet3ToSave, $sheet3_id, 3);
 
 
