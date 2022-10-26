@@ -1,3 +1,4 @@
 /charts/vendor/
 .idea
 /charts/tmp/
+/charts/composer.lock
