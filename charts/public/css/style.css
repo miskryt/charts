@@ -1,12 +1,12 @@
 
 .table  {
     font-size: 12px;
+    overflow-x: auto;
 }
 
 table { border-collapse:collapse }
 
 .header-cell{
-    min-width: 60px;
     font-weight: bold;
     white-space: nowrap;
 }
