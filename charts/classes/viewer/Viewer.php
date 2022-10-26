@@ -137,13 +137,28 @@ class Viewer
 		$sheet_id = $params['sheet']['id'];
 
 		$tables = $wpdb->get_results(sprintf("select * from charts_sheets where file_id=%d and id=%d", $file_id, $sheet_id), ARRAY_A);
-		$charts = $wpdb->get_results(sprintf("select * from charts_charts where file_id=%d", $file_id), ARRAY_A);
+		$charts = $wpdb->get_results(sprintf("select * from charts_charts where file_id=%d and sheet_id=%d", $file_id, $sheet_id), ARRAY_A);
 
 		$params['tables'] = json_decode($tables[0]['sheet'], 1);
 		$params['charts'] = json_decode($charts[0]['charts'], 1);
 
-		//echo $this->blade->make('pages.sheet_2', $params)->render();
-		require_once BASEPATH.'/views/pages/sheet_2.php';
+
+		require_once BASEPATH.'/views/pages/sheet_3.php';
+	}
+
+	private function renderSheet3($params){
+		global $wpdb;
+
+		$file_id = $params['file_id'];
+		$sheet_id = $params['sheet']['id'];
+
+		$tables = $wpdb->get_results(sprintf("select * from charts_sheets where file_id=%d and id=%d", $file_id, $sheet_id), ARRAY_A);
+		$charts = $wpdb->get_results(sprintf("select * from charts_charts where file_id=%d and sheet_id=%d", $file_id, $sheet_id), ARRAY_A);
+
+		$params['tables'] = json_decode($tables[0]['sheet'], 1);
+		$params['charts'] = json_decode($charts[0]['charts'], 1);
+
+		require_once BASEPATH.'/views/pages/sheet_3.php';
 	}
 
 	private function renderSheet($sheets, $sheet_id, $file_id){

@@ -1,5 +1,5 @@
 <?php
-include "vendor/autoload.php";
+include __DIR__."/vendor/autoload.php";
 
 define('BASEPATH', __DIR__);
 define('THEME_NAME', 'liveu');
