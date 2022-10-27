@@ -1,30 +1,19 @@
 
 $(document).ready(function ()
 {
-    $("#toggle_filter_0").on('click', function (){
-        $('.filters').toggle();
-
-        if( $('.filters').is(":hidden"))
-        {
-            $(this).removeClass('btn-secondary');
-            $(this).addClass('btn-outline-secondary');
-        }
-        else {
-            $(this).addClass('btn-secondary');
-            $(this).removeClass('btn-outline-secondary');
-        }
-
-    });
-
-
-
-
     // Setup - add a text input to each footer cell
+    $('#table_0 thead tr')
+        .clone(true)
+        .addClass('filters')
+        .hide()
+        .appendTo('#table_0 thead');
 
     var table = $('#table_0').DataTable({
         paging: false,
         fixedHeader: true,
         scrollX: true,
+        orderCellsTop: true,
+        "processing": true,
 
 
         columnDefs: [
@@ -72,12 +61,6 @@ $(document).ready(function ()
 
         initComplete: function () {
             var api = this.api();
-
-            $('#table_0 thead tr')
-                .clone(true)
-                .addClass('filters')
-                .hide()
-                .appendTo('#table_0 thead');
 
             api
                 .columns()
@@ -132,5 +115,32 @@ $(document).ready(function ()
                         });
                 });
         },
+    });
+
+    $("#toggle_filter_0").on('click', function (e){
+
+        $('.filters').toggle();
+
+        if( $('.filters').is(":hidden"))
+        {
+            $(this).removeClass('btn-secondary');
+            $(this).addClass('btn-outline-secondary');
+        }
+        else {
+            $(this).addClass('btn-secondary');
+            $(this).removeClass('btn-outline-secondary');
+        }
+    });
+
+    var table = $('.tables_1').DataTable({
+        paging: false,
+        fixedHeader: true,
+
+        orderCellsTop: true,
+        "processing": true,
+        searching: false
+
+
+
     });
 });

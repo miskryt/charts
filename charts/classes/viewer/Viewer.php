@@ -98,6 +98,7 @@ class Viewer
 			'sheet' => [
 				'header_row' => $param['sheet']['header_row'],
 				'rows' => $param['sheet']['rows'],
+				'sheet_name' => $param['sheet']['sheet_name']
 			]
 		];
 
@@ -176,9 +177,9 @@ class Viewer
 
 		$params = [
 			'filename' => $filename,
-			'sheets' => $sheets,
-			'sheet' => $sheet,
-			'file_id'=>$file_id
+			'sheets'   => $sheets,
+			'sheet'    => $sheet,
+			'file_id'  => $file_id
 		];
 
 		if((int)$sheet['sheet_index'] === 0)

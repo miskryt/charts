@@ -1,7 +1,7 @@
 <?php require_once BASEPATH.'/views/includes/header.php';?>
 <?php require_once BASEPATH.'/views/includes/navbar.php';?>
 
-<h5><?=$params['sheets'][2]['sheet_name']?></h5>
+<h5><?=$params['sheet']['sheet_name']?></h5>
     <div class="row">
         <div class="col-10">
             <canvas id="chart1" ></canvas>

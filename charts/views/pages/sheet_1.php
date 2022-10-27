@@ -13,12 +13,12 @@
 		</div>
 	</div>
 </div>
-<div class="table-block">
-	<table class="tables_1 table table-hover table-border" style="border-style: solid">
+<div class="table-block tables_1_table_block">
+	<table class="tables_1 nowrap table table-striped table-hover table-border" style="border-style: solid">
 		<thead>
             <tr>
                 <?php foreach($params['tables']['table1']['header_row'] as $cell):?>
-                    <th class="header-cell text-start">
+                    <th class="header-cell text-center">
                         <?=$cell?>
                     </th>
                 <?php endforeach?>
@@ -51,12 +51,14 @@
 		</div>
 	</div>
 </div>
-<div class="table-block">
-	<table class="tables_1 table table-hover table-border" style="border-style: solid">
+
+
+<div class="table-block tables_1_table_block">
+	<table class="tables_1 nowrap table table-striped table-hover table-border" style="border-style: solid">
 		<thead>
 		<tr>
 			<?php foreach($params['tables']['table2']['header_row'] as $cell):?>
-                <th class="header-cell text-start">
+                <th class="header-cell text-center">
                     <?=$cell?>
                 </th>
 			<?php endforeach ?>
@@ -89,12 +91,13 @@
 		</div>
 	</div>
 </div>
-<div class="table-block">
-	<table class=" tables_1 table table-hover table-border" style="border-style: solid">
+
+<div class="table-block tables_1_table_block">
+	<table class=" tables_1 nowrap table table-striped table-hover table-border" style="border-style: solid">
 		<thead>
 		<tr>
 			<?php foreach($params['tables']['table3']['header_row'] as $cell):?>
-                <th class="header-cell text-start">
+                <th class="header-cell text-center">
                     <?=$cell?>
                 </th>
 			<?php endforeach?>

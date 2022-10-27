@@ -6,9 +6,14 @@
 
 table { border-collapse:collapse }
 
+.tables_1_table_block{
+    max-width: 700px;
+}
+
 .header-cell{
     font-weight: bold;
     white-space: nowrap;
+    text-align: center;
 }
 
 thead input {
@@ -17,6 +22,7 @@ thead input {
 
 .cell{
     white-space: nowrap;
+    text-align: center;
 }
 
 .header-row{
@@ -44,7 +50,7 @@ table.dataTable{
     margin-top: 0px !important;
 }
 
-.dataTables_scroll{
+.dataTables_scroll, .tables_1{
     border: 1px solid #C8C8C8;
     border-radius: 4px;
 }
