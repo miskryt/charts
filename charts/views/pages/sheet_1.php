@@ -116,38 +116,6 @@
 	</table>
 </div>
 
-<div class="image-block">
-	<div class="row justify-content-start">
-		<div class="col">
-			<div class="card card-sheet-name">
-				<div class="card-body">
-                    <h5>
-						<?=$params['tables']['table4']['table_name']?>
-                    </h5>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="image-div">
-		<img class="image" src="data:image/jpeg;base64, <?=base64_encode($params['tables']['table4']['images'][0]['image'])?>"/>
-	</div>
-</div>
 
-<div class="image-block">
-	<div class="row justify-content-start">
-		<div class="col">
-			<div class="card card-sheet-name">
-				<div class="card-body">
-                    <h5>
-						<?=$params['tables']['table5']['table_name']?>
-                    </h5>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="image-div">
-		<img class="image" src="data:image/jpeg;base64, <?=base64_encode($params['tables']['table5']['images'][0]['image'])?>"/>
-	</div>
-</div>
 
 <?php require_once BASEPATH.'/views/includes/footer.php';?>
