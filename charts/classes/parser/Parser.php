@@ -137,7 +137,8 @@ class Parser
 		}
 
 		foreach ($headerRow->getCellIterator() as $cell){
-			$data['header_row'][] = $cell->getValue();
+			if(!empty($cell->getValue()))
+				$data['header_row'][] = $cell->getValue();
 		}
 
 		foreach (array_slice($sheet->toArray(), 4) as $i => $row ){
@@ -145,7 +146,8 @@ class Parser
 
 			foreach ($row as $cell)
 			{
-				$cells[] = $cell;
+				if(!empty($cell))
+					$cells[] = $cell;
 			}
 
 			$data['rows'][] = $cells;
@@ -157,9 +159,50 @@ class Parser
 		}
 
 		$result['data'] = json_encode($data);
-		$result['sheet_name'] = $this->getWorkSheetByIndex(0)->getTitle();
+		$result['sheet_name'] = 'Bet Frequency Averages';//$this->getWorkSheetByIndex(0)->getTitle();
+		$result['nav_title'] = 'Raw Data';
 
 		return $result;
+	}
+
+	private function parseImages($sheet_index = 1){
+		$this->reader->setReadDataOnly(true);
+
+		$table4 = $this->getWorkSheetByIndex($sheet_index)->rangeToArray('A55:E56', NULL, TRUE, TRUE, TRUE);
+		$table5 = $this->getWorkSheetByIndex($sheet_index)->rangeToArray('A78:E78', NULL, TRUE, TRUE, TRUE);
+
+
+		try{
+			$this->reader->setReadDataOnly(false);
+			$images = $this->getImagesFromSheet($sheet_index);
+		}
+		catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
+			die('Error parsing images from sheet'.$sheet_index.': '.$e->getMessage());
+		}
+
+		$sheet = [
+			'data' => [],
+			'nav_title' => 'Ranges',
+			'sheet_name' => ''
+		];
+
+		$images =
+			[
+				[
+					'image' => $images[0],
+					'image_name' => $table4[55]['A']
+				],
+				[
+					'image' => $images[1],
+					'image_name' => $table5[78]['A']
+				]
+			];
+
+
+		return [
+			'images' => $images,
+			'sheet' => $sheet,
+		];
 	}
 
 	// many tables with images
@@ -171,12 +214,12 @@ class Parser
 			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('A19:G35', NULL, TRUE, TRUE, TRUE);
 			$table3 = $this->getWorkSheetByIndex(1)->rangeToArray('A37:H53', NULL, TRUE, TRUE, TRUE);
 
-			$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('A55:E56', NULL, TRUE, TRUE, TRUE);
-			$table5 = $this->getWorkSheetByIndex(1)->rangeToArray('A78:E78', NULL, TRUE, TRUE, TRUE);
+			//$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('A55:E56', NULL, TRUE, TRUE, TRUE);
+			//$table5 = $this->getWorkSheetByIndex(1)->rangeToArray('A78:E78', NULL, TRUE, TRUE, TRUE);
 
-			$table6 = $this->getWorkSheetByIndex(1)->rangeToArray('K1:R40', NULL, TRUE, TRUE, TRUE);
-			$table7 = $this->getWorkSheetByIndex(1)->rangeToArray('T1:AA40', NULL, TRUE, TRUE, TRUE);
-			$table8 = $this->getWorkSheetByIndex(1)->rangeToArray('AC1:AJ40', NULL, TRUE, TRUE, TRUE);
+			//$table6 = $this->getWorkSheetByIndex(1)->rangeToArray('K1:R40', NULL, TRUE, TRUE, TRUE);
+			//$table7 = $this->getWorkSheetByIndex(1)->rangeToArray('T1:AA40', NULL, TRUE, TRUE, TRUE);
+			//$table8 = $this->getWorkSheetByIndex(1)->rangeToArray('AC1:AJ40', NULL, TRUE, TRUE, TRUE);
 		}
 		catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
 			die('Error parsing sheet1: '.$e->getMessage());
@@ -194,6 +237,7 @@ class Parser
 		$data['table3']['header_row'] = array_slice($table3, 1)[0];
 		$data['table3']['rows'] = array_slice(array_slice($table3, 1), 1);
 
+		/*
 		$data['table4']['table_name'] = $table4[55]['A'];
 		$data['table4']['header_row'] = array_slice($table4, 1)[0];
 		$data['table4']['rows'] = array_slice(array_slice($table4, 1), 1);
@@ -201,7 +245,9 @@ class Parser
 		$data['table5']['table_name'] = $table5[78]['A'];
 		$data['table5']['header_row'] = array_slice($table5, 1)[0];
 		$data['table5']['rows'] = array_slice(array_slice($table5, 1), 1);
+		*/
 
+		/*
 		$data['table6']['table_name'] = '';
 		$data['table6']['header_row'] = array_slice($table6, 0)[0];
 		$data['table6']['rows'] = array_slice(array_slice($table6, 1), 1);
@@ -213,29 +259,13 @@ class Parser
 		$data['table8']['table_name'] = '';
 		$data['table8']['header_row'] = array_slice($table8, 0)[0];
 		$data['table8']['rows'] = array_slice(array_slice($table8, 1), 1);
+		*/
 
 		$data['data'] = json_encode($data);
 		$data['sheet_name'] = $this->getWorkSheetByIndex(1)->getTitle();
+		$data['nav_title'] = $this->getWorkSheetByIndex(1)->getTitle();
 
 		return $data;
-	}
-
-	private function parseImages($sheet_index = 1){
-		$this->reader->setReadDataOnly(false);
-
-		try{
-			$images = $this->getImagesFromSheet($sheet_index);
-		}
-		catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
-			die('Error parsing images from sheet'.$sheet_index.': '.$e->getMessage());
-		}
-
-		$sheetName = $this->getWorkSheetByIndex($sheet_index)->getTitle();
-
-		return [
-			'data' => $images,
-			'sheet_name' => $sheetName
-			];
 	}
 
 	// charts sheet 1
@@ -277,6 +307,7 @@ class Parser
 
 		$data['data'] = json_encode($data);
 		$data['sheet_name'] = $this->getWorkSheetByIndex(2)->getTitle();
+		$data['nav_title'] = $this->getWorkSheetByIndex(2)->getTitle();
 
 
 		return $data;
@@ -346,6 +377,7 @@ class Parser
 
 		$data['data'] = json_encode($data);
 		$data['sheet_name'] = $this->getWorkSheetByIndex(3)->getTitle();
+		$data['nav_title'] = $this->getWorkSheetByIndex(3)->getTitle();
 
 
 		return $data;
@@ -392,6 +424,7 @@ class Parser
 
 		$data['data'] = json_encode($data);
 		$data['sheet_name'] = $this->getWorkSheetByIndex(2)->getTitle();
+		$data['nav_title'] = $this->getWorkSheetByIndex(2)->getTitle();
 
 		return $data;
 	}
@@ -462,19 +495,22 @@ class Parser
 
 		$data['data'] = json_encode($data);
 		$data['sheet_name'] = $this->getWorkSheetByIndex(3)->getTitle();
+		$data['nav_title'] = $this->getWorkSheetByIndex(3)->getTitle();
 
 		return $data;
 	}
 
-	private function saveSheetToDb($data, $index, $tableName=''){
+	private function saveSheetToDb($data, $index, $nav_position,  $tableName=''){
 		global $wpdb;
 
 		$ret = $wpdb->insert('charts_sheets', array(
 			'sheet' => $data['data'],
 			'sheet_name' => $data['sheet_name'],
+			'nav_title' => $data['nav_title'],
 			'table_name' => $tableName,
 			'file_id' => $this->file_id,
-			'sheet_index' => $index
+			'sheet_index' => $index,
+			'nav_position' => $nav_position
 		));
 
 		return $wpdb->insert_id;
@@ -495,16 +531,30 @@ class Parser
 		return $wpdb->insert_id;
 	}
 
-	private function saveImagesToDb($data, $sheet_id, $sheet_index){
+	private function saveImagesToDb($data, $nav_position){
 		global $wpdb;
 
-		foreach ($data['data'] as $image){
+		//var_dump($data);die();\
+
+		$ret = $wpdb->insert('charts_sheets', array(
+			'file_id' => $this->file_id,
+			'sheet' => '',
+			'table_name' => '',
+			'sheet_index' => '11',
+			'nav_title' => $data['sheet']['nav_title'],
+			'nav_position' => $nav_position
+		));
+
+		$sheet_id = $wpdb->insert_id;
+
+		foreach ($data['images'] as $image){
 			$ret = $wpdb->insert('charts_images', array(
-				'sheet_name' => $data['sheet_name'],
 				'file_id' => $this->file_id,
-				'image' => $image,
-				'sheet_id' => $sheet_id
+				'sheet_id' => $sheet_id,
+				'image_name' => $image['image_name'],
+				'image' => $image['image'],
 			));
+
 		}
 
 	}
@@ -529,15 +579,17 @@ class Parser
 		}
 
 		$this->SaveFileNameToDb($file, $filename);
-		$this->saveSheetToDb($sheet0ToSave, 0,'Bet Frequency Averages');
 
-		$sheet_id = $this->saveSheetToDb($sheet1ToSave, 1 );
-		$this->saveImagesToDb($imagesToSave, $sheet_id, 1);
+		$this->saveImagesToDb($imagesToSave, 0);
 
-		$sheet2_id = $this->saveSheetToDb($sheet2ToSave, 2,'Bet Freq Graphs');
+		$this->saveSheetToDb($sheet0ToSave, 0,1, 'Bet Frequency Averages');
+
+		$this->saveSheetToDb($sheet1ToSave, 1, 2);
+
+		$sheet2_id = $this->saveSheetToDb($sheet2ToSave, 2,3,'Bet Freq Graphs');
 		$this->saveChartsToDb($chartsSheet2ToSave, $sheet2_id, 2);
 
-		$sheet3_id = $this->saveSheetToDb($sheet3ToSave, 3,'EV and EQR Graphs');
+		$sheet3_id = $this->saveSheetToDb($sheet3ToSave, 3,4, 'EV and EQR Graphs');
 		$this->saveChartsToDb($chartsSheet3ToSave, $sheet3_id, 3);
 
 

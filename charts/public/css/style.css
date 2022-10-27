@@ -1,7 +1,7 @@
 
 .table  {
     font-size: 12px;
-    overflow-x: auto;
+    border: 0px;
 }
 
 table { border-collapse:collapse }
@@ -21,13 +21,32 @@ thead input {
 
 .header-row{
     background-color: #F8F8F8;
+    border-bottom: none;
+}
+
+.header-row tr th{
+    background-color: #F8F8F8;
+    border-bottom: none;
+}
+div.dataTables_scrollBody {
+    border-left: 0px !important;
 }
 
 
+.dataTables_scrollHeadInner
+{
+    border-bottom: none;
+    padding-bottom: 10px;
+    background-color: #F8F8F8;
+}
 
-.table-border{
-    border: 2px solid #C8C8C8;
-    border-radius: 5px;
+table.dataTable{
+    margin-top: 0px !important;
+}
+
+.dataTables_scroll{
+    border: 1px solid #C8C8C8;
+    border-radius: 4px;
 }
 
 thead > tr {
@@ -43,6 +62,24 @@ td, th {
 }
 
 .image{
-    width: 60%;
+    float: left;
+    width: 100%;
+    padding: 5px;
 }
 
+#table_0_wrapper .row:first-child{
+    display: none;
+}
+
+.navbar-nav .nav-link.active{
+    color: blue !important;
+    font-weight: bold;
+    padding-left: 0;
+}
+
+
+
+
+#table_0_wrapper{
+    margin-top: 10px
+}

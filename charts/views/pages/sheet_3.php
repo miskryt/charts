@@ -1,13 +1,8 @@
 <?php require_once BASEPATH.'/views/includes/header.php';?>
 <?php require_once BASEPATH.'/views/includes/navbar.php';?>
 
-<div class="row">
-    <div class="col">
-        <h4>
-			<?=$params['filename']?>
-        </h4>
-    </div>
-</div>
+
+<h5><?=$params['sheets'][3]['sheet_name']?></h5>
 
 <div class="row">
 	<div class="col-10">
