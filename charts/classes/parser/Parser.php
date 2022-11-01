@@ -401,23 +401,23 @@ class Parser
 
 
 		$data['table1']['table_name'] = 'Overall Betting Averages';
-		$data['table1']['header_row'][] = '';
+		$data['table1']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('B2:F2', NULL, TRUE, TRUE, TRUE);;
 		$data['table1']['rows'] = array_slice(array_slice($table1, 0), 1);
 
 		$data['table2']['table_name'] = 'A High Boards';
-		$data['table2']['header_row'][] = '';
+		$data['table2']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M1:Q1', NULL, TRUE, TRUE, TRUE);;
 		$data['table2']['rows'] = array_slice(array_slice($table2, 0), 1);
 
 		$data['table3']['table_name'] = 'Broadway Boards';
-		$data['table3']['header_row'][] = '';
+		$data['table3']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M16:Q16', NULL, TRUE, TRUE, TRUE);;
 		$data['table3']['rows'] = array_slice(array_slice($table3, 0), 1);
 
 		$data['table4']['table_name'] = 'Mid Boards';
-		$data['table4']['header_row'][] = '';
+		$data['table4']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M30:Q30', NULL, TRUE, TRUE, TRUE);;
 		$data['table4']['rows'] = array_slice(array_slice($table4, 0), 1);
 
 		$data['table5']['table_name'] = 'Low Boards';
-		$data['table5']['header_row'][] = '';
+		$data['table5']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M38:Q38', NULL, TRUE, TRUE, TRUE);;
 		$data['table5']['rows'] = array_slice(array_slice($table5, 0), 1);
 
 

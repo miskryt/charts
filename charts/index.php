@@ -1,7 +1,9 @@
 <?php
 include __DIR__."/vendor/autoload.php";
+include __DIR__."/classes/viewer/Viewer.php";
 define('BASEPATH', __DIR__);
-define('THEME_NAME', 'liveu');
+
+
 
 if(isset($_REQUEST['upload']) && $_REQUEST['upload'] === 'file')
 {

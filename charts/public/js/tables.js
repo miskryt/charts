@@ -1,78 +1,78 @@
 $(document).ready(function () {
 
-  $('#table_0 thead tr')
-    .clone(true)
-    .addClass('filters')
-    .hide()
-    .appendTo('#table_0 thead');
+    $('#table_0 thead tr')
+        .clone(true)
+        .addClass('filters')
+        .hide()
+        .appendTo('#table_0 thead');
 
 
-  var table_0 = $('#table_0').DataTable({
-    paging: false,
-    fixedHeader: true,
-    scrollX: true,
-    orderCellsTop: true,
-    "processing": true,
-    columnDefs: [
-      {
-        target: 0,
-        visible: false,
-      }
-    ],
-    initComplete: function () {
-      var api = this.api();
+    var table_0 = $('#table_0').DataTable({
+        paging: false,
+        fixedHeader: true,
+        scrollX: true,
+        orderCellsTop: true,
+        "processing": true,
+        columnDefs: [
+            {
+                target: 0,
+                visible: false,
+            }
+        ],
+        initComplete: function () {
+            var api = this.api();
 
-      api
-        .columns()
-        .eq(0)
-        .each(function (colIdx) {
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
 
-          if (colIdx === 0)
-            return;
+                    if (colIdx === 0)
+                        return;
 
-          var cell = $('.filters th').eq(
-            $(api.column(colIdx).header()).index()
-          );
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
 
-          var title = $(cell).text().trim();
-          $(cell).html('<input type="text" />');
+                    var title = $(cell).text().trim();
+                    $(cell).html('<input type="text" />');
 
-          var cursorPositionS;
-          var cursorPositionE;
+                    var cursorPositionS;
+                    var cursorPositionE;
 
 
-          $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
-            .off('keyup change')
-            .on('change', function (e) {
-              // Get the search value
-              $(this).attr('title', $(this).val());
-              var regexr = '({search})'; //$(this).parents('th').find('select').val();
+                    $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
 
-              cursorPositionS = this.selectionStart;
-              cursorPositionE = this.selectionEnd;
+                            cursorPositionS = this.selectionStart;
+                            cursorPositionE = this.selectionEnd;
 
-              api
-                .column(colIdx)
-                .search(
-                  this.value != ''
-                    ? regexr.replace('{search}', '(((' + this.value + ')))')
-                    : '',
-                  this.value != '',
-                  this.value == ''
-                )
-                .draw();
-            })
-            .on('keyup', function (e) {
-              e.stopPropagation();
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+                        })
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
 
-              $(this).trigger('change');
-              $(this)
-                .focus()[0]
-                .setSelectionRange(cursorPositionS, cursorPositionE);
-            });
-        });
-    },
-  });
+                            $(this).trigger('change');
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPositionS, cursorPositionE);
+                        });
+                });
+        },
+    });
 
     $("#reset_filter_0").on('click', function (e)
     {
@@ -88,21 +88,21 @@ $(document).ready(function () {
         table_0.order( [ 1, 'asc' ] ).draw();
     });
 
-  $("#toggle_filter_0").on('click', function (e)
-  {
-      $(this).parents().find('.filters').toggle();
+    $("#toggle_filter_0").on('click', function (e)
+    {
+        $(this).parents().find('.filters').toggle();
 
-    if ($(this).parents().find('.filters').is(":hidden"))
-    {
-      $(this).removeClass('btn-secondary');
-      $(this).addClass('btn-outline-secondary');
-    }
-    else
-    {
-      $(this).addClass('btn-secondary');
-      $(this).removeClass('btn-outline-secondary');
-    }
-  });
+        if ($(this).parents().find('.filters').is(":hidden"))
+        {
+            $(this).removeClass('btn-secondary');
+            $(this).addClass('btn-outline-secondary');
+        }
+        else
+        {
+            $(this).addClass('btn-secondary');
+            $(this).removeClass('btn-outline-secondary');
+        }
+    });
 });
 
 

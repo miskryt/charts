@@ -1,6 +1,6 @@
 <?php
 
-
+define('THEME_NAME', 'liveu');
 if (file_exists( __DIR__.'/charts/index.php')) {
 	require_once __DIR__.'/charts/index.php';
 }
