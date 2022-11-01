@@ -113,11 +113,11 @@ class Viewer
 		$sheet_id = $params['sheet']['id'];
 
 		$tables = $wpdb->get_results(sprintf("select * from charts_sheets where file_id=%d and id=%d", $file_id, $sheet_id), ARRAY_A);
-		$images = $wpdb->get_results(sprintf("select * from charts_images where file_id=%d and sheet_id=%d", $file_id, $sheet_id), ARRAY_A);
+		//$images = $wpdb->get_results(sprintf("select * from charts_images where file_id=%d and sheet_id=%d", $file_id, $sheet_id), ARRAY_A);
 
 		$params['tables'] = json_decode($tables[0]['sheet'], 1);
-		$params['tables']['table4']['images'][0] = $images[0];
-		$params['tables']['table5']['images'][0] = $images[1];
+		//$params['tables']['table4']['images'][0] = $images[0];
+		//$params['tables']['table5']['images'][0] = $images[1];
 
 		require_once BASEPATH.'/views/pages/sheet_1.php';
 	}
@@ -199,7 +199,7 @@ class Viewer
 	}
 
 	public function Render(){
-
+    global $wpdb;
 		if(!isset($_REQUEST['file_id']))
 		{
 			$files = $this->getFiles();
@@ -208,8 +208,17 @@ class Viewer
 
 		if(isset($_REQUEST['file_id']))
 		{
-			$file_id = (int)$_REQUEST['file_id'];
-			$sheets = $this->getAllSheetsByFileId($file_id, (int)$_REQUEST['sheet']);
+
+      if($_REQUEST['chart']){
+        $chart = $_REQUEST['chart'];
+        $row = $wpdb->get_row($wpdb->prepare("select * from charts_files where slug = '%s'", $chart), ARRAY_A);
+        $file_id = $row['id'];
+      } else {
+        $file_id = $_REQUEST['file_id'];
+      }
+
+
+      $sheets = $this->getAllSheetsByFileId($file_id, (int)$_REQUEST['sheet']);
 
 			$this->renderSheet($sheets, $file_id,  (int)$_REQUEST['sheet']);
 		}
