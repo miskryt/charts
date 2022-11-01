@@ -452,43 +452,43 @@ class Parser
 
 
 		$data['table1']['table_name'] = 'Overall EV and EQR Averages ';
-		$data['table1']['header_row'][] = '';
+		$data['table1']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('B38:G38', NULL, TRUE, TRUE, TRUE);;
 		$data['table1']['rows'] = array_slice(array_slice($table1, 0), 1);
 
 		$data['table2']['table_name'] = 'EV Averages By Bet Size';
-		$data['table2']['header_row'][] = '';
+		$data['table2']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('B20:F20', NULL, TRUE, TRUE, TRUE);;
 		$data['table2']['rows'] = array_slice(array_slice($table2, 0), 1);
 
 		$data['table3']['table_name'] = 'A High Board EV and EQR Averages';
-		$data['table3']['header_row'][] = '';
+		$data['table3']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
 		$data['table3']['rows'] = array_slice(array_slice($table3, 0), 1);
 
 		$data['table4']['table_name'] = 'A High Board EV Averages By Bet Size';
-		$data['table4']['header_row'][] = '';
+		$data['table4']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
 		$data['table4']['rows'] = array_slice(array_slice($table4, 0), 1);
 
 		$data['table5']['table_name'] = 'Broadway Board EV and EQR Averages';
-		$data['table5']['header_row'][] = '';
+		$data['table5']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
 		$data['table5']['rows'] = array_slice(array_slice($table5, 0), 1);
 
 		$data['table6']['table_name'] = 'Broadway Board EV Averages By Bet Size';
-		$data['table6']['header_row'][] = '';
+		$data['table6']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
 		$data['table6']['rows'] = array_slice(array_slice($table6, 0), 1);
 
 		$data['table7']['table_name'] = 'Mid Board EV and EQR Averages';
-		$data['table7']['header_row'][] = '';
+		$data['table7']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
 		$data['table7']['rows'] = array_slice(array_slice($table7, 0), 1);
 
 		$data['table8']['table_name'] = 'Mid Board EV Averages By Bet Size';
-		$data['table8']['header_row'][] = '';
+		$data['table8']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
 		$data['table8']['rows'] = array_slice(array_slice($table8, 0), 1);
 
 		$data['table9']['table_name'] = 'Low Board EV and EQR Averages';
-		$data['table9']['header_row'][] = '';
+		$data['table9']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
 		$data['table9']['rows'] = array_slice(array_slice($table9, 0), 1);
 
 		$data['table10']['table_name'] = 'Low Board EV Averages By Bet Size ';
-		$data['table10']['header_row'][] = '';
+		$data['table10']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
 		$data['table10']['rows'] = array_slice(array_slice($table10, 0), 1);
 
 
