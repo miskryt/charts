@@ -14,7 +14,7 @@
           <?php else: ?>
             <?php foreach ($files as $file): ?>
               <a href="?file_id=<?= $file['id'] ?>"
-                 class="button btn btn-success btn-md pull-left"><?= $file['filename'] ?></a>
+                 class="button btn btn-grey btn-md pull-left"><?= $file['filename'] ?></a>
             <?php endforeach ?>
           <?php endif; ?>
         </div>

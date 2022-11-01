@@ -117,9 +117,10 @@ $(document).ready(function () {
 
     var table_1 = $('#table_1').DataTable({
         paging: false,
+
+
         orderCellsTop: true,
         "processing": true,
-
 
         initComplete: function () {
             var api = this.api();
@@ -128,8 +129,6 @@ $(document).ready(function () {
                 .columns()
                 .eq(0)
                 .each(function (colIdx) {
-
-
 
                     var cell = $('#table_1 .filters th').eq(
                         $(api.column(colIdx).header()).index()
@@ -179,21 +178,21 @@ $(document).ready(function () {
     {
         e.preventDefault();
 
-        $(this).parents().find('#table_1 .filters').hide();
+        $('#table_1 .filters').hide();
 
         $(this).addClass('btn-secondary');
         $(this).removeClass('btn-outline-secondary');
 
 
-        $(this).parents().find('#table_1 .filters input').val('').change();
+        $('#table_1 .filters input').val('').change();
         table_1.order( [ 0, 'asc' ] ).draw();
     });
 
     $("#toggle_filter_1").on('click', function (e)
     {
-        $(this).parents().find('#table_1 .filters').toggle();
+        $('#table_1 .filters').toggle();
 
-        if ($(this).parents().find('#table_1 .filters').is(":hidden"))
+        if ($('#table_1 .filters').is(":hidden"))
         {
             $(this).removeClass('btn-secondary');
             $(this).addClass('btn-outline-secondary');
@@ -220,7 +219,6 @@ $(document).ready(function () {
         orderCellsTop: true,
         "processing": true,
 
-
         initComplete: function () {
             var api = this.api();
 
@@ -228,8 +226,6 @@ $(document).ready(function () {
                 .columns()
                 .eq(0)
                 .each(function (colIdx) {
-
-
 
                     var cell = $('#table_2 .filters th').eq(
                         $(api.column(colIdx).header()).index()
@@ -279,21 +275,21 @@ $(document).ready(function () {
     {
         e.preventDefault();
 
-        $(this).parents().find('#table_2 .filters').hide();
+        $('#table_2 .filters').hide();
 
         $(this).addClass('btn-secondary');
         $(this).removeClass('btn-outline-secondary');
 
 
-        $(this).parents().find('#table_2 .filters input').val('').change();
+        $('#table_2 .filters input').val('').change();
         table_2.order( [ 0, 'asc' ] ).draw();
     });
 
     $("#toggle_filter_2").on('click', function (e)
     {
-        $(this).parents().find('#table_2 .filters').toggle();
+        $('#table_2 .filters').toggle();
 
-        if ($(this).parents().find('#table_2 .filters').is(":hidden"))
+        if ($('#table_2 .filters').is(":hidden"))
         {
             $(this).removeClass('btn-secondary');
             $(this).addClass('btn-outline-secondary');
@@ -320,7 +316,6 @@ $(document).ready(function () {
         orderCellsTop: true,
         "processing": true,
 
-
         initComplete: function () {
             var api = this.api();
 
@@ -328,8 +323,6 @@ $(document).ready(function () {
                 .columns()
                 .eq(0)
                 .each(function (colIdx) {
-
-
 
                     var cell = $('#table_3 .filters th').eq(
                         $(api.column(colIdx).header()).index()
@@ -379,21 +372,21 @@ $(document).ready(function () {
     {
         e.preventDefault();
 
-        $(this).parents().find('#table_3 .filters').hide();
+        $('#table_3 .filters').hide();
 
         $(this).addClass('btn-secondary');
         $(this).removeClass('btn-outline-secondary');
 
 
-        $(this).parents().find('#table_3 .filters input').val('').change();
+        $('#table_3 .filters input').val('').change();
         table_3.order( [ 0, 'asc' ] ).draw();
     });
 
     $("#toggle_filter_3").on('click', function (e)
     {
-        $(this).parents().find('#table_3 .filters').toggle();
+        $('#table_3 .filters').toggle();
 
-        if ($(this).parents().find('#table_3 .filters').is(":hidden"))
+        if ($('#table_3 .filters').is(":hidden"))
         {
             $(this).removeClass('btn-secondary');
             $(this).addClass('btn-outline-secondary');

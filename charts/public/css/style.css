@@ -14,19 +14,12 @@ h5 {
   line-height: 36px;
 }
 
-.filter-buttons button {
-  width: 46px;
-  height: 30px;
-  margin-right: 5px;
-  cursor: pointer;
+.filter-buttons  button {
+  padding: 0 5px;
 }
 
-.filter-buttons button svg {
-  padding-top: 0px;
-}
-
-.filter-buttons button span.btn-text {
-  padding-top: 0px;
+.filter-buttons  button svg {
+  padding-top: 5px;
 }
 
 .table {
@@ -36,10 +29,6 @@ h5 {
 
 table {
   border-collapse: collapse
-}
-
-.float-left{
-  float: left;
 }
 
 .tables_1_table_block {
@@ -121,7 +110,11 @@ td, th {
   border-style: hidden;
 }
 
-#table_0_wrapper .row:first-child {
+#table_0_wrapper .row:first-child,
+#table_1_wrapper .row:first-child,
+#table_2_wrapper .row:first-child,
+#table_3_wrapper .row:first-child
+{
   display: none;
 }
 
@@ -184,7 +177,7 @@ td, th {
 }
 
 
-.dataTables_info, .dataTables_filter {
+.dataTables_info {
   display: none;
 }
 
@@ -231,4 +224,48 @@ table.tables_1 {
 
 .charts-xls .row .card-sheet-name {
   padding: 30px 0 10px 0;
+}
+
+body.pc-theme-dark .site-content {
+  background-color: #191b23;
+  color: white;
+}
+
+body.pc-theme-dark .site-content h1,
+body.pc-theme-dark .site-content h5 {
+  color: white;
+}
+
+body.pc-theme-dark .charts-xls .tab-navigation ul li a {
+  color: white;
+}
+
+body.pc-theme-dark .charts-xls .tab-navigation ul li a.active {
+  color: #56606e !important;
+}
+
+body.pc-theme-dark .charts-xls .header-row,
+body.pc-theme-dark .charts-xls .dataTables_scrollHeadInner,
+body.pc-theme-dark .charts-xls .dataTable thead {
+  background-color: #181b23;
+}
+
+
+body.pc-theme-dark .charts-xls .dataTables_scroll {
+  border: 1px solid #000000;
+}
+
+body.pc-theme-dark .charts-xls .dataTables_scroll table tr.odd {
+  background: #3a3c46;
+}
+
+body.pc-theme-dark .charts-xls .dataTables_scroll table tr.even {
+  background: #565863;
+}
+
+.btn-grey {
+  background: rgb(69,69,69);
+  background: linear-gradient(0deg, rgba(69,69,69,1) 0%, rgba(109,111,108,1) 100%);
+  border-radius: 7px;
+  border: 0;
 }
