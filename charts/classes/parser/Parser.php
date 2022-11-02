@@ -286,23 +286,23 @@ class Parser
 
 		$data['table1']['table_name'] = $table1[1]['AB'];
 		$data['table1']['header_row'][] = $table1[1]['AB'];
-		$data['table1']['rows'] = array_slice(array_slice($table1, 1), 1);
+		$data['table1']['rows'] = array_slice(array_slice($table1, 1), 0);
 
 		$data['table2']['table_name'] = $table2[33]['AB'];
 		$data['table2']['header_row'][] = $table2[33]['AB'];
-		$data['table2']['rows'] = array_slice(array_slice($table2, 1), 1);
+		$data['table2']['rows'] = array_slice(array_slice($table2, 1), 0);
 
 		$data['table3']['table_name'] = $table3[63]['AB'];
 		$data['table3']['header_row'][] = $table3[63]['AB'];
-		$data['table3']['rows'] = array_slice(array_slice($table3, 1), 1);
+		$data['table3']['rows'] = array_slice(array_slice($table3, 1), 0);
 
 		$data['table4']['table_name'] = $table4[93]['AB'];
 		$data['table4']['header_row'][] = $table4[93]['AB'];
-		$data['table4']['rows'] = array_slice(array_slice($table4, 1), 1);
+		$data['table4']['rows'] = array_slice(array_slice($table4, 1), 0);
 
 		$data['table5']['table_name'] = $table5[124]['AB'];
 		$data['table5']['header_row'][] = $table5[124]['AB'];
-		$data['table5']['rows'] = array_slice(array_slice($table5, 1), 1);
+		$data['table5']['rows'] = array_slice(array_slice($table5, 1), 0);
 
 
 		$data['data'] = json_encode($data);
@@ -389,7 +389,7 @@ class Parser
 		try
 		{
 			$table1 = $this->getWorkSheetByIndex(1)->rangeToArray('A2:F17', NULL, TRUE, TRUE, TRUE);
-			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('K1:Q15', NULL, TRUE, TRUE, TRUE);
+			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('K1:P15', NULL, TRUE, TRUE, TRUE);
 			$table3 = $this->getWorkSheetByIndex(1)->rangeToArray('K16:Q29', NULL, TRUE, TRUE, TRUE);
 			$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('K30:Q37', NULL, TRUE, TRUE, TRUE);
 			$table5 = $this->getWorkSheetByIndex(1)->rangeToArray('K38:Q40', NULL, TRUE, TRUE, TRUE);
@@ -398,27 +398,56 @@ class Parser
 			die('Error parsing charts: '.$e->getMessage());
 		}
 
+		$tbl2 = [];
+		foreach (array_slice($table2, 1) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl2[] = $v;
+		}
 
+		$tbl3 = [];
+		foreach (array_slice($table3, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl3[] = $v;
+		}
+
+		$tbl4 = [];
+		foreach (array_slice($table4, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl4[] = $v;
+		}
+
+		$tbl5 = [];
+		foreach (array_slice($table5, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl5[] = $v;
+		}
+
+
+		$headers = $this->getWorkSheetByIndex(1)->rangeToArray('M1:Q1', NULL, TRUE, TRUE, TRUE);
 
 		$data['table1']['table_name'] = 'Overall Betting Averages';
-		$data['table1']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('B2:F2', NULL, TRUE, TRUE, TRUE);;
-		$data['table1']['rows'] = array_slice(array_slice($table1, 0), 1);
+		$data['table1']['header_row'][] = $headers;
+		$data['table1']['rows'] = array_slice($table1, 1);
 
 		$data['table2']['table_name'] = 'A High Boards';
-		$data['table2']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M1:Q1', NULL, TRUE, TRUE, TRUE);;
-		$data['table2']['rows'] = array_slice(array_slice($table2, 0), 1);
+		$data['table2']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M1:P1', NULL, TRUE, TRUE, TRUE);;
+		$data['table2']['rows'] = $tbl2;
 
 		$data['table3']['table_name'] = 'Broadway Boards';
-		$data['table3']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M16:Q16', NULL, TRUE, TRUE, TRUE);;
-		$data['table3']['rows'] = array_slice(array_slice($table3, 0), 1);
+		$data['table3']['header_row'][] = $headers;
+		$data['table3']['rows'] = $tbl3;
 
 		$data['table4']['table_name'] = 'Mid Boards';
-		$data['table4']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M30:Q30', NULL, TRUE, TRUE, TRUE);;
-		$data['table4']['rows'] = array_slice(array_slice($table4, 0), 1);
+		$data['table4']['header_row'][] = $headers;
+		$data['table4']['rows'] = $tbl4;
 
 		$data['table5']['table_name'] = 'Low Boards';
-		$data['table5']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('M38:Q38', NULL, TRUE, TRUE, TRUE);;
-		$data['table5']['rows'] = array_slice(array_slice($table5, 0), 1);
+		$data['table5']['header_row'][] = $headers;
+		$data['table5']['rows'] = $tbl5;
 
 
 
@@ -434,10 +463,10 @@ class Parser
 
 		try
 		{
-			$table1 = $this->getWorkSheetByIndex(1)->rangeToArray('A38:G53', NULL, TRUE, TRUE, TRUE);
-			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('A20:F35', NULL, TRUE, TRUE, TRUE);
-			$table3 = $this->getWorkSheetByIndex(1)->rangeToArray('T1:AA15', NULL, TRUE, TRUE, TRUE);
-			$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('AC1:AI15', NULL, TRUE, TRUE, TRUE);
+			$table1 = $this->getWorkSheetByIndex(1)->rangeToArray('A39:G53', NULL, TRUE, TRUE, TRUE);
+			$table2 = $this->getWorkSheetByIndex(1)->rangeToArray('A21:F35', NULL, TRUE, TRUE, TRUE);
+			$table3 = $this->getWorkSheetByIndex(1)->rangeToArray('T2:AA15', NULL, TRUE, TRUE, TRUE);
+			$table4 = $this->getWorkSheetByIndex(1)->rangeToArray('AC2:AI15', NULL, TRUE, TRUE, TRUE);
 			$table5 = $this->getWorkSheetByIndex(1)->rangeToArray('T16:AA29', NULL, TRUE, TRUE, TRUE);
 			$table6 = $this->getWorkSheetByIndex(1)->rangeToArray('AC16:AI29', NULL, TRUE, TRUE, TRUE);
 			$table7 = $this->getWorkSheetByIndex(1)->rangeToArray('T30:AA37', NULL, TRUE, TRUE, TRUE);
@@ -450,6 +479,62 @@ class Parser
 		}
 
 
+		$tbl3 = [];
+		foreach (array_slice($table3, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl3[] = $v;
+		}
+
+		$tbl4 = [];
+		foreach (array_slice($table4, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl4[] = $v;
+		}
+
+		$tbl5 = [];
+		foreach (array_slice($table5, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl5[] = $v;
+		}
+
+		$tbl6 = [];
+		foreach (array_slice($table6, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl6[] = $v;
+		}
+
+		$tbl7 = [];
+		foreach (array_slice($table7, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl7[] = $v;
+		}
+
+		$tbl8 = [];
+		foreach (array_slice($table8, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl8[] = $v;
+		}
+
+		$tbl9 = [];
+		foreach (array_slice($table9, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl9[] = $v;
+		}
+
+		$tbl10 = [];
+		foreach (array_slice($table10, 0) as $item)
+		{
+			$v = array_merge(array_slice($item, 0, 1), array_slice($item, 2));
+			$tbl10[] = $v;
+		}
+
 
 		$data['table1']['table_name'] = 'Overall EV and EQR Averages ';
 		$data['table1']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('B38:G38', NULL, TRUE, TRUE, TRUE);;
@@ -461,35 +546,35 @@ class Parser
 
 		$data['table3']['table_name'] = 'A High Board EV and EQR Averages';
 		$data['table3']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
-		$data['table3']['rows'] = array_slice(array_slice($table3, 0), 1);
+		$data['table3']['rows'] = $tbl3;
 
 		$data['table4']['table_name'] = 'A High Board EV Averages By Bet Size';
 		$data['table4']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
-		$data['table4']['rows'] = array_slice(array_slice($table4, 0), 1);
+		$data['table4']['rows'] = $tbl4;
 
 		$data['table5']['table_name'] = 'Broadway Board EV and EQR Averages';
 		$data['table5']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
-		$data['table5']['rows'] = array_slice(array_slice($table5, 0), 1);
+		$data['table5']['rows'] = $tbl5;
 
 		$data['table6']['table_name'] = 'Broadway Board EV Averages By Bet Size';
 		$data['table6']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
-		$data['table6']['rows'] = array_slice(array_slice($table6, 0), 1);
+		$data['table6']['rows'] = $tbl6;
 
 		$data['table7']['table_name'] = 'Mid Board EV and EQR Averages';
 		$data['table7']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
-		$data['table7']['rows'] = array_slice(array_slice($table7, 0), 1);
+		$data['table7']['rows'] = $tbl7;
 
 		$data['table8']['table_name'] = 'Mid Board EV Averages By Bet Size';
 		$data['table8']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
-		$data['table8']['rows'] = array_slice(array_slice($table8, 0), 1);
+		$data['table8']['rows'] = $tbl8;
 
 		$data['table9']['table_name'] = 'Low Board EV and EQR Averages';
 		$data['table9']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('V1:AA1', NULL, TRUE, TRUE, TRUE);;
-		$data['table9']['rows'] = array_slice(array_slice($table9, 0), 1);
+		$data['table9']['rows'] = $tbl9;
 
 		$data['table10']['table_name'] = 'Low Board EV Averages By Bet Size ';
 		$data['table10']['header_row'][] = $this->getWorkSheetByIndex(1)->rangeToArray('AE1:AI1', NULL, TRUE, TRUE, TRUE);;
-		$data['table10']['rows'] = array_slice(array_slice($table10, 0), 1);
+		$data['table10']['rows'] = $tbl10;
 
 
 
